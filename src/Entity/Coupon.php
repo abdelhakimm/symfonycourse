@@ -14,7 +14,7 @@ class Coupon
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, unique: true)]
     private ?string $code = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -32,7 +32,7 @@ class Coupon
     #[ORM\Column]
     private ?bool $is_valid = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default'=> 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $creadet_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'coupons')]
