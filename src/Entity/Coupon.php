@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CouponRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CouponRepository::class)]
 class Coupon
 {
+
+    use CreatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,9 +38,7 @@ class Coupon
     #[ORM\Column]
     private ?bool $is_valid = null;
 
-    #[ORM\Column(options: ['default'=> 'CURRENT_TIMESTAMP'])]
-    private ?\DateTimeImmutable $creadet_at = null;
-
+    
     #[ORM\ManyToOne(inversedBy: 'coupons')]
     #[ORM\JoinColumn(nullable: false)]
     private ?CouponType $coupon_type = null;
@@ -47,6 +49,7 @@ class Coupon
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -126,18 +129,7 @@ class Coupon
         return $this;
     }
 
-    public function getCreadetAt(): ?\DateTimeImmutable
-    {
-        return $this->creadet_at;
-    }
-
-    public function setCreadetAt(\DateTimeImmutable $creadet_at): self
-    {
-        $this->creadet_at = $creadet_at;
-
-        return $this;
-    }
-
+  
     public function getCouponType(): ?CouponType
     {
         return $this->coupon_type;

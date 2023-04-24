@@ -30,7 +30,10 @@
               
                 {{ form_row(registrationForm.RGPDConsents) }}
     
-                <button type="submit" class="btn btn-primary my-4">Register</button>
+                <button type="submit" class="btn btn-lg btn-primary my-4">S'inscrire</button>
+
+                <a class="btn btn-secondary mt-1" aria-current="page" href="{{path('app_login')}}">Connexion</a>
+
                 {{ form_end(registrationForm) }}
             </div>
         </div>
